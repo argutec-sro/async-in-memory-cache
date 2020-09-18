@@ -1,7 +1,7 @@
 name: Nuget package release
 
 env:
-  project: 'AsyncInMemoryCache\\AsyncInMemoryCache.csproj'
+  project: 'AsyncInMemoryCache\\Argutec.AsyncInMemoryCache.csproj'
 
 on:
   create:
