@@ -1,5 +1,8 @@
 name: Nuget package release
 
+env:
+  project: 'AsyncInMemoryCache/AsyncInMemoryCache.csproj'
+
 on:
   create:
     tags:
@@ -15,11 +18,11 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore ${{env.project}}
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build ${{env.project}}--configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test ${{env.project}} --no-restore --verbosity normal
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -32,7 +35,7 @@ jobs:
         echo $RELEASE_VERSION
         echo ${{ env.RELEASE_VERSION }}
     - name: Pack Nuget package
-      run: dotnet pack --configuration Release -p:PackageVersion=$RELEASE_VERSION
+      run: dotnet pack ${{env.project}} --configuration Release -p:PackageVersion=$RELEASE_VERSION
     - name: Push Nuget package
       run: dotnet nuget push **/*.nupkg
             --api-key ${{ secrets.NUGET_API_KEY }}
