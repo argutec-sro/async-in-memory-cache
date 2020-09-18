@@ -6,7 +6,7 @@ env:
 on:
   create:
     tags:
-    - '*.*.*.*'
+    - '*.*.*'
 
 jobs:
   build:
@@ -38,5 +38,5 @@ jobs:
       run: dotnet pack "${{env.project}}" --configuration Release -p:PackageVersion=$RELEASE_VERSION
     - name: Push Nuget package
       run: dotnet nuget push **/*.nupkg
-            --api-key ${{ secrets.NUGET_API_KEY }}
-            --source https://api.nuget.org/v3/index.json
+            --api-key "${{ secrets.TOKEN }}"
+            --source "https://api.nuget.org/v3/index.json"
