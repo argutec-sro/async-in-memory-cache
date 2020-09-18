@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace AsyncInMemoryCache
+namespace Argutec.AsyncInMemoryCache
 {
     public class AsyncInMemoryCache
     {
